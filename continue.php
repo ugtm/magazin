@@ -1,4 +1,8 @@
-<html>
+<?
+session_start();
+if($_SESSION['permission']=="ok") {
+	?>
+	<html>
 <head>
 	<title></title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -50,50 +54,13 @@
 			</ul>
 		</div>
 		<div id="container">
-			<h1>Bine ati venit <? session_start(); echo $_SESSION['name']; ?>!</h1>
-			<?
-			session_start();
-			if($_SESSION['permission']=="ok") {
-				if($_SESSION['id']==$_GET['id']||$_GET['id']==''||$_GET['']=='') {
-					$page=$_GET['id']=$_SESSION['id'];?>
-					<h2>Utilizator:</h2><br/><ul>
-					<li><a href="change.php">Schimba parola</a></li>
-					<li><a href="edit.php">Editeaza profilul</a></li>
-				</ul>
-				<div id="profile"><h2>Detalii profil</h2><br/><ul>
-					<?
-					include "connect.php";
-					$result=mysql_query("SELECT * FROM USERS WHERE id='$page'");
-					while($row=mysql_fetch_array($result)) {
-						echo "<li>Nume si prenume: ".$row['name']."</li>";
-						echo "<li>Email: ".$row['email']."</li>";
-					}
-					?>
-				</ul></div>
-				<?}
-				else {
-					$page=$_GET['id'];?>
-				<div id="profile"><h2>Detalii profil</h2><br/><ul><?
-					include "connect.php";
-					$result=mysql_query("SELECT * FROM USERS WHERE id='$page'");
-					while($row=mysql_fetch_array($result)) {
-						echo "<li>Nume si prenume: ".$row['name']."</li>";
-						echo "<li>Email: ".$row['email']."</li>";
-					}
-					?>
-				</ul></div>
-				<?
-				}
-			}
-			else {?>
-				<h3>Produse bla bla bla</h3><p></p><p></p>
-				<?
-			}
-			?>
-		</div>
-	</div>
-	<div id="footer">
-		&copy Stein Daian 2012
-	</div>
-</body>
-<html>
+			<form method="post" action="comand.php">
+				<div id="name">
+					Nume:<input type="text" name="name"/><br/>
+					Prenume:<input type="text" name="prenume"/></br>
+					E-mail:<input type="text" name="email"/><br/>
+				</div>
+				<div id="delivery">
+					Adresa:<input type="text" name="adress"/><br/>
+					Judet:<input type="Text" name="jud"/><br/>
+					Mod de livrare:<input type="radio" name=

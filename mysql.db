@@ -1,0 +1,8 @@
+CREATE TABLE  `magazin`.`USERS` (
+`id` INT NOT NULL AUTO_INCREMENT ,
+`email` VARCHAR( 80 ) NOT NULL ,
+`password` VARCHAR( 80 ) NOT NULL ,
+`name` VARCHAR( 100 ) NOT NULL ,
+`adress` VARCHAR( 100 ) NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = MYISAM ;

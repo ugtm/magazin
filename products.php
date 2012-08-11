@@ -50,44 +50,21 @@
 			</ul>
 		</div>
 		<div id="container">
-			<h1>Bine ati venit <? session_start(); echo $_SESSION['name']; ?>!</h1>
-			<?
-			session_start();
-			if($_SESSION['permission']=="ok") {
-				if($_SESSION['id']==$_GET['id']||$_GET['id']==''||$_GET['']=='') {
-					$page=$_GET['id']=$_SESSION['id'];?>
-					<h2>Utilizator:</h2><br/><ul>
-					<li><a href="change.php">Schimba parola</a></li>
-					<li><a href="edit.php">Editeaza profilul</a></li>
-				</ul>
-				<div id="profile"><h2>Detalii profil</h2><br/><ul>
-					<?
-					include "connect.php";
-					$result=mysql_query("SELECT * FROM USERS WHERE id='$page'");
-					while($row=mysql_fetch_array($result)) {
-						echo "<li>Nume si prenume: ".$row['name']."</li>";
-						echo "<li>Email: ".$row['email']."</li>";
-					}
-					?>
-				</ul></div>
-				<?}
-				else {
-					$page=$_GET['id'];?>
-				<div id="profile"><h2>Detalii profil</h2><br/><ul><?
-					include "connect.php";
-					$result=mysql_query("SELECT * FROM USERS WHERE id='$page'");
-					while($row=mysql_fetch_array($result)) {
-						echo "<li>Nume si prenume: ".$row['name']."</li>";
-						echo "<li>Email: ".$row['email']."</li>";
-					}
-					?>
-				</ul></div>
-				<?
-				}
+			<? session_start();
+			include "connect.php";
+			if($_GET['id']==''||$_GET['']=='') {
+				echo "";
 			}
-			else {?>
-				<h3>Produse bla bla bla</h3><p></p><p></p>
-				<?
+			else {
+				$page=$_GET['id'];
+				$result=mysql_query("SELECT * FROM PRODUCTS WHERE id='$page'");
+				while($row=mysql_fetch_array($result)) {
+					echo "<h3>".$row['name']."</h3>";
+					echo "<img src='upload/".$row['image']."'></img>";
+					echo "<div id='details'>";
+					echo "";
+					echo "</div>";
+				}
 			}
 			?>
 		</div>
